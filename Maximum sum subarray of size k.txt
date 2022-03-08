@@ -1,0 +1,63 @@
+#include <iostream>
+#include <climits>
+using namespace std;
+
+
+int main(){
+    int a[]={1,4,2,10,23,3,1,0,20};
+    int size=sizeof(a)/sizeof(a[0]);
+    int k=4;
+    int sum=0;
+    int maxi=INT_MIN;
+    if(k>size){
+        cout<<"Invalid"<<endl;
+    }
+    else{
+        for(int i=0;i<size;i++){
+            sum=0;
+            for(int j=i;j<i+k && j<size;j++){
+                sum+=a[j];
+            }
+            maxi=max(maxi,sum);
+        }
+        cout<<maxi<<endl;
+    }
+    return 0;
+}
+TIME COMPLEXITY O(size*k)
+SPACE COMPLEXITY O(1)
+
+
+#include <iostream>
+using namespace std;
+
+int maximumSumSubarray(int K, int Arr[] , int N){
+    if(K>N){
+        return -1;
+    }
+    else{
+        int sum=0;
+        for(int i=0;i<K;i++){
+            sum+=Arr[i];
+        }
+        int maxi=sum;
+        for(int i=K;i<N;i++){
+            sum+=Arr[i]-Arr[i-K];
+            maxi=max(maxi,sum);
+        }
+        return maxi;
+    }        
+}
+
+
+int main(){
+int a[]={100,200,300,400};
+int size=sizeof(a)/sizeof(a[0]);
+int k=2;
+int value=maximumSumSubarray(k,a,size);
+cout<<value<<endl;
+return 0;
+}
+
+TIME COMPLEXITY O(size)
+SPACE COMPLEXITY O(1)
